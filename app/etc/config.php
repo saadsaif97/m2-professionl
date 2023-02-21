@@ -347,6 +347,7 @@ return [
         'MarkShust_DisableTwoFactorAuth' => 1,
         'PayPal_Braintree' => 1,
         'PayPal_BraintreeGraphQl' => 1,
+        'SwiftOtter_OrderExport' => 1,
         'Temando_ShippingRemover' => 1
     ]
 ];
