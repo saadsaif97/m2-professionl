@@ -1,6 +1,6 @@
 <?php
 
-namespace SwiftOtter\OrderExport\Model;
+namespace SaadSaif\OrderExport\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;

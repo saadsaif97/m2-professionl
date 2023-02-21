@@ -1,6 +1,6 @@
 <?php
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'SwiftOtter_OrderExport',
+    'SaadSaif_OrderExport',
     __DIR__
 );
