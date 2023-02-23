@@ -2,6 +2,7 @@
 
 namespace SaadSaif\OrderExport\Console\Command;
 
+use SaadSaif\OrderExport\Action\CollectOrderData;
 use SaadSaif\OrderExport\Model\HeaderData;
 use SaadSaif\OrderExport\Model\HeaderDataFactory;
 use Symfony\Component\Console\Command\Command;
@@ -16,14 +17,17 @@ class OrderExport extends Command
     const OPT_NAME_SHIP_DATE = 'ship-date';
     const OPT_NAME_MERCHANT_NOTES = 'notes';
     private HeaderDataFactory $headerDataFactory;
+    private CollectOrderData $collectOrderData;
 
     public function __construct(
         HeaderDataFactory $headerDataFactory,
+        CollectOrderData $collectOrderData,
         string $name = null
     )
     {
         parent::__construct($name);
         $this->headerDataFactory = $headerDataFactory;
+        $this->collectOrderData = $collectOrderData;
     }
 
     /**
@@ -68,7 +72,9 @@ class OrderExport extends Command
             $headerData->setMerchantNotes($notes);
         }
 
-        $output->writeln(print_r($headerData, true));
+        $orderData = $this->collectOrderData->execute($orderId, $headerData);
+
+        $output->writeln(print_r($orderData, true));
 
         return 0;
     }
