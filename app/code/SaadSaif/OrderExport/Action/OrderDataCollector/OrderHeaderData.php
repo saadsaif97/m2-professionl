@@ -1,6 +1,6 @@
 <?php
 
-namespace SaadSaif\OrderExport\Action;
+namespace SaadSaif\OrderExport\Action\OrderDataCollector;
 
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Sales\Api\Data\OrderAddressInterface;

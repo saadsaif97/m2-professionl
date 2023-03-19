@@ -57,13 +57,15 @@ class OrderExport extends Command
         parent::configure();
     }
 
+    /**
+     * @throws \Exception
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $orderId = (int) $input->getArgument(self::ARG_NAME_ORDER_ID);
         $shipDate = $input->getOption(self::OPT_NAME_SHIP_DATE);
         $notes = $input->getOption(self::OPT_NAME_MERCHANT_NOTES);
 
-        /** @var HeaderData $headerData */
         $headerData = $this->headerDataFactory->create();
         if ($shipDate) {
             $headerData->setShipDate(new \DateTime($shipDate));
