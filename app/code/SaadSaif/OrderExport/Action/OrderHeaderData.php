@@ -16,7 +16,7 @@ class OrderHeaderData implements OrderDataCollectorInterface
 
     public function __construct(
         OrderAddressRepositoryInterface $orderAddressRepository,
-        SearchCriteriaBuilder $searchCriteriaBuilder
+        SearchCriteriaBuilder           $searchCriteriaBuilder
     )
     {
         $this->orderAddressRepository = $orderAddressRepository;
@@ -51,7 +51,8 @@ class OrderHeaderData implements OrderDataCollectorInterface
 
     public function getShippingAddress(OrderInterface $order): ?OrderAddressInterface
     {
-        $this->searchCriteriaBuilder->addFilter('parent_id', $order->getEntityId())
+        $this->searchCriteriaBuilder
+            ->addFilter('parent_id', $order->getEntityId())
             ->addFilter('address_type', 'shipping');
         $addresses = $this->orderAddressRepository->getList($this->searchCriteriaBuilder->create());
 
