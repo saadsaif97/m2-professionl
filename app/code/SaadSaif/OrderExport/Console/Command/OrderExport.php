@@ -2,8 +2,7 @@
 
 namespace SaadSaif\OrderExport\Console\Command;
 
-use SaadSaif\OrderExport\Action\CollectOrderData;
-use SaadSaif\OrderExport\Model\HeaderData;
+use SaadSaif\OrderExport\Action\ExportOrderData;
 use SaadSaif\OrderExport\Model\HeaderDataFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -17,17 +16,17 @@ class OrderExport extends Command
     const OPT_NAME_SHIP_DATE = 'ship-date';
     const OPT_NAME_MERCHANT_NOTES = 'notes';
     private HeaderDataFactory $headerDataFactory;
-    private CollectOrderData $collectOrderData;
+    private ExportOrderData $exportOrderData;
 
     public function __construct(
         HeaderDataFactory $headerDataFactory,
-        CollectOrderData $collectOrderData,
+        ExportOrderData $exportOrderData,
         string $name = null
     )
     {
         parent::__construct($name);
         $this->headerDataFactory = $headerDataFactory;
-        $this->collectOrderData = $collectOrderData;
+        $this->exportOrderData = $exportOrderData;
     }
 
     /**
@@ -74,9 +73,21 @@ class OrderExport extends Command
             $headerData->setMerchantNotes($notes);
         }
 
-        $orderData = $this->collectOrderData->execute($orderId, $headerData);
+        $result = $this->exportOrderData->execute((int) $orderId, $headerData);
+        $success = $result['success'] ?? false;
 
-        $output->writeln(print_r($orderData, true));
+        if ($success) {
+            $output->writeln(__('Successfully exported order'));
+        } else {
+            $msg = $result['error'] ?? null;
+            if ($msg == null) {
+                $msg = __('Something unexpected happened');
+            }
+            $output->writeln($msg);
+            return 1;
+        }
+
+        //$output->writeln(print_r($orderData, true));
 
         return 0;
     }
