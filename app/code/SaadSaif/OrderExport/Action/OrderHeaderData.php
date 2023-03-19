@@ -2,16 +2,27 @@
 
 namespace SaadSaif\OrderExport\Action;
 
-use Laminas\Json\Json;
-use Magento\Customer\Model\CustomerFactory;
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Sales\Api\Data\OrderAddressInterface;
 use Magento\Sales\Api\Data\OrderInterface;
-use Magento\Store\Model\StoreManagerInterface;
-use Magento\TestFramework\Event\Magento;
+use Magento\Sales\Api\OrderAddressRepositoryInterface;
 use SaadSaif\OrderExport\Api\OrderDataCollectorInterface;
 use SaadSaif\OrderExport\Model\HeaderData;
 
 class OrderHeaderData implements OrderDataCollectorInterface
 {
+    private OrderAddressRepositoryInterface $orderAddressRepository;
+    private SearchCriteriaBuilder $searchCriteriaBuilder;
+
+    public function __construct(
+        OrderAddressRepositoryInterface $orderAddressRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder
+    )
+    {
+        $this->orderAddressRepository = $orderAddressRepository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+    }
+
     public function collect(OrderInterface $order, HeaderData $headerData): array
     {
         $output = [
@@ -21,20 +32,35 @@ class OrderHeaderData implements OrderDataCollectorInterface
             "total" => $order->getGrandTotal(),
         ];
 
-        if (true) {
+        $shippingAddress = $this->getShippingAddress($order);
+        if ($shippingAddress) {
             $output["shipping"] = [
-                "name" => "Chris Nanning",
-                "address" => "123 Main Street",
-                "city" => "Kansas City",
-                "state" => "KS",
-                "postcode" => "12345",
-                "country" => "US",
-                "amount" => 15,
-                "method" => "UPS"
+                "name" => $shippingAddress->getFirstname() . ' ' . $shippingAddress->getLastname(),
+                "address" => $shippingAddress->getStreet() ? implode(', ', $shippingAddress->getStreet()) : '',
+                "city" => $shippingAddress->getCity(),
+                "state" => $shippingAddress->getRegionCode(),
+                "postcode" => $shippingAddress->getPostcode(),
+                "country" => $shippingAddress->getCountryId(),
+                "amount" => $order->getShippingAmount(),
+                "method" => $order->getShippingDescription()
             ];
         }
 
         return $output;
+    }
+
+    public function getShippingAddress(OrderInterface $order): ?OrderAddressInterface
+    {
+        $this->searchCriteriaBuilder->addFilter('parent_id', $order->getEntityId())
+            ->addFilter('address_type', 'shipping');
+        $addresses = $this->orderAddressRepository->getList($this->searchCriteriaBuilder->create());
+
+        if (count($addresses) == 0) {
+            return null;
+        }
+
+        $items = $addresses->getItems();
+        return reset($items);
     }
 
 }

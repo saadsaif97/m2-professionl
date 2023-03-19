@@ -29,7 +29,7 @@ class CollectOrderData
 
         $output = [];
         foreach ($this->collectors as $collector){
-            $output = $collector->collect($order, $headerData);
+            $output = array_merge_recursive($output ,$collector->collect($order, $headerData));
         }
 
         return $output;
