@@ -4,6 +4,7 @@ namespace SaadSaif\OrderExport\Action;
 
 use Magento\Catalog\Model\Product\Type;
 use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Api\Data\OrderItemInterface;
 
 class GetOrderExportItems
 {
@@ -16,6 +17,10 @@ class GetOrderExportItems
         $this->allowedTypes = $allowedTypes;
     }
 
+    /**
+     * @param OrderInterface $order
+     * @return OrderItemInterface[]
+     */
     public function execute(OrderInterface $order): array
     {
         $items = [];
