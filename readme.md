@@ -25,3 +25,17 @@ If you search for "carriers/fedex/password" in di.xml files, you'll find one mor
 ```
 
 Another example of injecting arguments with DI config, this registers the config path as a "sensitive" value with Magento. Sensitive and environment-specific values are written to app/etc/env.php (not intended for version control) instead of app/etc/config.php (is intended for version control) if config values are dumped to disk. It's best practice to include this di.xml configuration for our own "sales/order_export/api_token" config path. (In fact, it's not a bad idea to inject our "sales/order_export/api_url" path into the "environment" argument of the same core class; it's reasonable to expect this value would differ between environments.)
+
+---
+
+## Create new entity with DB schema
+
+`db_schema.xml` `module-cms` `cms_block` is most vanilla form.
+
+foreign key: `TABLE_COLUMN_REFERENCE_TABLE_REFRERENCE_COLUMN`
+
+```xml
+<constraint xsi:type="foreign" referenceId="CMS_BLOCK_STORE_BLOCK_ID_CMS_BLOCK_BLOCK_ID" table="cms_block_store"
+                    column="block_id" referenceTable="cms_block" referenceColumn="block_id" onDelete="CASCADE"/>
+```
+when ever you update or delete db schema, you should update the whitelist.json also
