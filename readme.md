@@ -9,6 +9,8 @@ If you search for "carriers/fedex/password" in di.xml files, you'll find one mor
 >Magento Core Concept
 >>If migrating database values from one environment to another, remember that encrypted values will be unreadable in environments with a different encryption key.
 
+If you search for "carriers/fedex/password" in di.xml files, you'll find one more thing that needs attention:
+
 ```xml
 <type name="Magento\Config\Model\Config\TypePool">
     <arguments>
