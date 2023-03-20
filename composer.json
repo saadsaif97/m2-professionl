@@ -100,7 +100,7 @@
         },
         "training-pro-dev": {
             "type": "path",
-            "url": "training-modules/professional-developer-project/src/*",
+            "url": "training-modules/project-professional-developer/src/*",
             "options": {
                 "symlink": true
             }
