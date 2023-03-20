@@ -4,9 +4,9 @@ namespace SaadSaif\OrderExport\Model;
 
 class HeaderData
 {
-    private ?string $merchantNotes;
+    private ?string $merchantNotes = null;
 
-    private ?\DateTime $shipDate;
+    private ?\DateTime $shipDate = null;
 
     public function getMerchantNotes(): ?string
     {

@@ -2,7 +2,9 @@
     "name": "saadsaif/module-orderexport",
     "description": "",
     "require": {
-        "magento/framework": "100.0.*"
+        "magento/framework": "100.0.*",
+        "magento/module-sales": "^103",
+        "guzzlehttp/guzzle": "^7.4"
     },
     "type": "magento2-module",
     "autoload": {
