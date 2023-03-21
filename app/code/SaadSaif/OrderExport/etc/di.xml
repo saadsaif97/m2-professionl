@@ -46,4 +46,7 @@
 
     <preference for="SaadSaif\OrderExport\Api\Data\OrderExportDetailsInterface"
                 type="SaadSaif\OrderExport\Model\OrderExportDetails"/>
+
+    <preference for="SaadSaif\OrderExport\Api\OrderExportDetailsRepositoryInterface"
+                type="SaadSaif\OrderExport\Model\OrderExportDetailsRepository"/>
 </config>

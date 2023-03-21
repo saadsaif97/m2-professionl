@@ -2,7 +2,10 @@
 
 namespace SaadSaif\OrderExport\Console\Command;
 
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use SaadSaif\OrderExport\Api\Data\OrderExportDetailsInterfaceFactory;
+use SaadSaif\OrderExport\Api\OrderExportDetailsRepositoryInterface;
 use SaadSaif\OrderExport\Model\ResourceModel\OrderExportDetails\CollectionFactory as OrderExportCollectionDetailsFactory;
 use SaadSaif\OrderExport\Model\ResourceModel\OrderExportDetails as OrderExportDetailsResource;
 use Symfony\Component\Console\Command\Command;
@@ -11,20 +14,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class OrderExportTest extends Command
 {
-    private OrderExportDetailsInterfaceFactory $orderExportDetailsInterfaceFactory;
-    private OrderExportDetailsResource $orderExportDetailsResource;
-    private OrderExportCollectionDetailsFactory $orderExportDetailsCollectionFactory;
+
+    private OrderExportDetailsRepositoryInterface $orderExportDetailsRepository;
 
     public function __construct(
-        OrderExportCollectionDetailsFactory $orderExportDetailsCollectionFactory,
-        OrderExportDetailsInterfaceFactory    $orderExportDetailsInterfaceFactory,
-        OrderExportDetailsResource            $orderExportDetailsResource,
+        OrderExportDetailsRepositoryInterface $orderExportDetailsRepository,
         string                                $name = null
     ) {
         parent::__construct($name);
-        $this->orderExportDetailsInterfaceFactory = $orderExportDetailsInterfaceFactory;
-        $this->orderExportDetailsResource = $orderExportDetailsResource;
-        $this->orderExportDetailsCollectionFactory = $orderExportDetailsCollectionFactory;
+        $this->orderExportDetailsRepository = $orderExportDetailsRepository;
     }
 
     /**
@@ -44,17 +42,17 @@ class OrderExportTest extends Command
      * @param OutputInterface $output
      *
      * @return int
+     * @throws LocalizedException
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-//        $exportDetails = $this->orderExportDetailsInterfaceFactory->create();
-//        $this->orderExportDetailsResource->load($exportDetails, 1);
-
-        $orderExportCollection = $this->orderExportDetailsCollectionFactory->create();
-
-        foreach ($orderExportCollection as $exportDetails) {
-            $output->writeln(print_r($exportDetails->getData(), true));
+        try {
+            $orderDetails = $this->orderExportDetailsRepository->getById(1);
+        } catch (\Exception $e) {
+            throw new LocalizedException(__($e->getMessage()));
         }
+
+        $output->writeln(print_r($orderDetails->getData(), true));
 
         return 0;
     }

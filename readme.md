@@ -58,3 +58,10 @@ Create the entity model from entity interface factory and load using the resourc
 $exportDetails = $this->orderExportDetailsInterfaceFactory->create();
 $this->orderExportDetailsResource->load($exportDetails, 1);
 ```
+
+---
+
+### Service layer contains `entity interface (service contract)` and `repository`
+The purpose of the repository is to create unified API for the entity.
+for filtering, sorting and ordering a collection we have a unified searchCriteriaInterface. 
+
