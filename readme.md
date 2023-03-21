@@ -28,7 +28,7 @@ Another example of injecting arguments with DI config, this registers the config
 
 ---
 
-## Create new entity with DB schema
+### Create new entity with DB schema
 
 `db_schema.xml` `module-cms` `cms_block` is most vanilla form.
 
@@ -39,3 +39,22 @@ foreign key: `TABLE_COLUMN_REFERENCE_TABLE_REFRERENCE_COLUMN`
                     column="block_id" referenceTable="cms_block" referenceColumn="block_id" onDelete="CASCADE"/>
 ```
 when ever you update or delete db schema, you should update the whitelist.json also
+
+---
+
+### Creating custom entity 
+`Entity Model`
+`Entity Interface`
+`Resource Model` 
+`Resource Collection`
+
+Entity model will be extending `Magento\Framework\Model\AbstractModel` that gives the magic methods.
+Resource model will hydrate our entity model.
+
+Create the preference on the entity interface for the entity model.
+Create the entity model from entity interface factory and load using the resource model.
+
+```php
+$exportDetails = $this->orderExportDetailsInterfaceFactory->create();
+$this->orderExportDetailsResource->load($exportDetails, 1);
+```
