@@ -65,3 +65,15 @@ $this->orderExportDetailsResource->load($exportDetails, 1);
 The purpose of the repository is to create unified API for the entity.
 for filtering, sorting and ordering a collection we have a unified searchCriteriaInterface. 
 
+---
+
+>Magento Core Concept
+>>In this case, leave the fully qualified class names for the @return and @param docblock comments. If we were to introduce support for the web API in the future, Magento uses reflection on our interfaces to wire up this functionality, and aliases won't be understood.
+
+like: 
+```php
+/**
+ * @return \Magento\Framework\Api\SearchResultsInterfaceOrderExportDetailsInterface[]
+ */
+public function getItems();
+```
