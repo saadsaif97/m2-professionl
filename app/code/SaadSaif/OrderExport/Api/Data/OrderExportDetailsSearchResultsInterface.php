@@ -3,15 +3,15 @@
 namespace SaadSaif\OrderExport\Api\Data;
 
 interface OrderExportDetailsSearchResultsInterface
-    extends \Magento\Framework\Api\SearchResultsInterfaceSearchResultsInterface
+    extends \Magento\Framework\Api\SearchResultsInterface
 {
     /**
-     * @return \Magento\Framework\Api\SearchResultsInterfaceOrderExportDetailsInterface[]
+     * @return \SaadSaif\OrderExport\Api\DataOrderExportDetailsInterface[]
      */
     public function getItems();
 
     /**
-     * @param \Magento\Framework\Api\SearchResultsInterfaceOrderExportDetailsInterface[] $items
+     * @param \SaadSaif\OrderExport\Api\DataOrderExportDetailsInterface[] $items
      * @return $this
      */
     public function setItems(array $items);

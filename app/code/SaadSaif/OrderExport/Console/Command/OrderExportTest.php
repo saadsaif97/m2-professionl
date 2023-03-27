@@ -2,12 +2,9 @@
 
 namespace SaadSaif\OrderExport\Console\Command;
 
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Exception\NoSuchEntityException;
-use SaadSaif\OrderExport\Api\Data\OrderExportDetailsInterfaceFactory;
 use SaadSaif\OrderExport\Api\OrderExportDetailsRepositoryInterface;
-use SaadSaif\OrderExport\Model\ResourceModel\OrderExportDetails\CollectionFactory as OrderExportCollectionDetailsFactory;
-use SaadSaif\OrderExport\Model\ResourceModel\OrderExportDetails as OrderExportDetailsResource;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,13 +13,16 @@ class OrderExportTest extends Command
 {
 
     private OrderExportDetailsRepositoryInterface $orderExportDetailsRepository;
+    private SearchCriteriaBuilder $searchCriteriaBuilder;
 
     public function __construct(
         OrderExportDetailsRepositoryInterface $orderExportDetailsRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
         string                                $name = null
     ) {
         parent::__construct($name);
         $this->orderExportDetailsRepository = $orderExportDetailsRepository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
     }
 
     /**
@@ -47,12 +47,15 @@ class OrderExportTest extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $orderDetails = $this->orderExportDetailsRepository->getById(1);
+            //$this->searchCriteriaBuilder->addFilter('order_id', 3);
+            $searchCriteria = $this->searchCriteriaBuilder->create();
+            $orderDetails = $this->orderExportDetailsRepository->getList($searchCriteria)->getItems();
+            foreach ($orderDetails as $orderExportDetail) {
+                $output->writeln(print_r($orderExportDetail->getData(), true));
+            }
         } catch (\Exception $e) {
             throw new LocalizedException(__($e->getMessage()));
         }
-
-        $output->writeln(print_r($orderDetails->getData(), true));
 
         return 0;
     }

@@ -49,5 +49,21 @@
     <preference for="SaadSaif\OrderExport\Api\OrderExportDetailsRepositoryInterface"
                 type="SaadSaif\OrderExport\Model\OrderExportDetailsRepository"/>
     <preference for="SaadSaif\OrderExport\Api\Data\OrderExportDetailsSearchResultsInterface"
-                type="SaadSaif\OrderExport\Model\OrderExportDetailsSearchResultsInterface"/>
+                type="SaadSaif\OrderExport\Model\OrderExportDetailsSearchResults"/>
+
+    <virtualType name="SaadSaif\OrderExport\Virtual\Model\Api\SearchCriteria\CollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="SaadSaif\OrderExport\Model\OrderExportDetailsRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">SaadSaif\OrderExport\Virtual\Model\Api\SearchCriteria\CollectionProcessor</argument>
+        </arguments>
+    </type>
 </config>
+
