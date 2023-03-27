@@ -5,11 +5,13 @@
             "order_id": true,
             "shop_on": true,
             "merchant_notes": true,
-            "exported_at": true
+            "exported_at": true,
+            "ship_on": true
         },
         "constraint": {
             "PRIMARY": true,
-            "SALES_ORDER_EXPORT_ID_SALES_ORDER_ENTITY_ID": true
+            "SALES_ORDER_EXPORT_ID_SALES_ORDER_ENTITY_ID": true,
+            "SALES_ORDER_EXPORT_ORDER_ID_SALES_ORDER_ENTITY_ID": true
         }
     }
 }
