@@ -1,0 +1,9 @@
+<?php
+
+/** @var \Magento\Framework\View\Element\Template $block */
+
+/** @var \SaadSaif\OrderExport\ViewModel\OrderExportDetails $viewModel */
+$viewModel = $block->getData('view_model');
+?>
+
+<a href="<?= $viewModel->getOrderDetailsUrl() ?>"><?= __('Export Details') ?></a>

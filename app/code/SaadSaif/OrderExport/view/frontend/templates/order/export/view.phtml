@@ -1,0 +1,39 @@
+<?php
+
+use SaadSaif\OrderExport\Api\Data\OrderExportDetailsInterface;
+
+/** @var \Magento\Framework\View\Element\Template $block */
+
+/** @var \SaadSaif\OrderExport\ViewModel\OrderExportView $viewModel */
+$viewModel = $block->getData('view_model');
+
+/** @var OrderExportDetailsInterface $exportDetails */
+$exportDetails = $viewModel->getOrderExportDetails();
+
+$shipOn = $exportDetails ? $exportDetails->getShipOn() : null;
+$merchantNotes = $exportDetails ? $exportDetails->getMerchantNotes() : null;
+if ($exportDetails) {
+    $isExported =  $exportDetails->getExportedAt() ? 'true' : 'false';
+}
+?>
+
+<?php if ($viewModel->getOrder()): ?>
+    <a href="<?= $viewModel->getOrderViewUrl() ?>"><?= __('Back to Order') ?></a>
+<?php endif; ?>
+
+<?php if (!$viewModel->getOrder() || !$viewModel->getOrderExportDetails()): ?>
+    <p><?= __('No details found') ?></p>
+<?php endif; ?>
+
+<?php if ($exportDetails && $viewModel->getOrderExportDetails()): ?>
+    <dl class="order-export-details">
+        <dt><?= __('Shipping On:') ?></dt>
+        <dd><?= $viewModel->formatDate($shipOn) ?></dd>
+
+        <dt><?= __('Merchant Notes:') ?></dt>
+        <dd><?= $merchantNotes ?></dd>
+
+        <dt><?= __('Is Exported:') ?></dt>
+        <dd><?= $isExported ?></dd>
+    </dl>
+<?php endif; ?>
