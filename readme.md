@@ -77,3 +77,7 @@ like:
  */
 public function getItems();
 ```
+
+---
+
+>>> The goal of extension attribute is to work seamlessly with the new entity considering as the part of the original entity

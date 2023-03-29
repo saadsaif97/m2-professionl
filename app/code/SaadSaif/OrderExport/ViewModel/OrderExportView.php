@@ -49,14 +49,12 @@ class OrderExportView implements ArgumentInterface
 
     public function getOrderExportDetails(): ?OrderExportDetailsInterface
     {
-        try {
-            $orderExportDetails = $this->orderExportDetailsInterfaceFactory->create();
-            return $orderExportDetails->setExportedAt(new \DateTime('2023-03-23'))
-                ->setShipOn(new \DateTime('2023-03-25'))
-                ->setMerchantNotes('Export Early')->setExportedAt(new \DateTime('2023-03-24'));
-        } catch (\Exception $e) {
-            return null;
+        $order = $this->getOrder();
+        if(!$order) {
+            return  null;
         }
+
+        return $order->getExtensionAttributes()->getExportDetails();
     }
 
     public function getOrder(): ?OrderInterface
