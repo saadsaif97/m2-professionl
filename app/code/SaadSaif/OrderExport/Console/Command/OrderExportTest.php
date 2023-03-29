@@ -4,6 +4,7 @@ namespace SaadSaif\OrderExport\Console\Command;
 
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Sales\Api\OrderRepositoryInterface;
 use SaadSaif\OrderExport\Api\OrderExportDetailsRepositoryInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,15 +15,18 @@ class OrderExportTest extends Command
 
     private OrderExportDetailsRepositoryInterface $orderExportDetailsRepository;
     private SearchCriteriaBuilder $searchCriteriaBuilder;
+    private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
         OrderExportDetailsRepositoryInterface $orderExportDetailsRepository,
         SearchCriteriaBuilder $searchCriteriaBuilder,
+        OrderRepositoryInterface $orderRepository,
         string                                $name = null
     ) {
         parent::__construct($name);
         $this->orderExportDetailsRepository = $orderExportDetailsRepository;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -48,10 +52,17 @@ class OrderExportTest extends Command
     {
         try {
             //$this->searchCriteriaBuilder->addFilter('order_id', 3);
-            $searchCriteria = $this->searchCriteriaBuilder->create();
-            $orderDetails = $this->orderExportDetailsRepository->getList($searchCriteria)->getItems();
-            foreach ($orderDetails as $orderExportDetail) {
-                $output->writeln(print_r($orderExportDetail->getData(), true));
+//            $searchCriteria = $this->searchCriteriaBuilder->create();
+//            $orderDetails = $this->orderExportDetailsRepository->getList($searchCriteria)->getItems();
+//            foreach ($orderDetails as $orderExportDetail) {
+//                $output->writeln(print_r($orderExportDetail->getData(), true));
+//            }
+            $order = $this->orderRepository->get('3');
+            $exportDetails = $order->getExtensionAttributes()->getExportDetails();
+            if($exportDetails) {
+                $output->writeln(print_r($exportDetails->getData(), true));
+            } else {
+                $output->writeln(__('no details found'));
             }
         } catch (\Exception $e) {
             throw new LocalizedException(__($e->getMessage()));

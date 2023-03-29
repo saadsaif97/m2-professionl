@@ -65,5 +65,8 @@
             <argument name="collectionProcessor" xsi:type="object">SaadSaif\OrderExport\Virtual\Model\Api\SearchCriteria\CollectionProcessor</argument>
         </arguments>
     </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="load_export_details_in_order" type="SaadSaif\OrderExport\Plugin\LoadExportDetailsInOrder"/>
+    </type>
 </config>
 
