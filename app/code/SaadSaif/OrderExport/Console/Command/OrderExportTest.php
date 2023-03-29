@@ -52,17 +52,13 @@ class OrderExportTest extends Command
     {
         try {
             //$this->searchCriteriaBuilder->addFilter('order_id', 3);
-//            $searchCriteria = $this->searchCriteriaBuilder->create();
-//            $orderDetails = $this->orderExportDetailsRepository->getList($searchCriteria)->getItems();
-//            foreach ($orderDetails as $orderExportDetail) {
-//                $output->writeln(print_r($orderExportDetail->getData(), true));
-//            }
-            $order = $this->orderRepository->get('3');
-            $exportDetails = $order->getExtensionAttributes()->getExportDetails();
-            if($exportDetails) {
-                $output->writeln(print_r($exportDetails->getData(), true));
-            } else {
-                $output->writeln(__('no details found'));
+            $searchCriteria = $this->searchCriteriaBuilder->create();
+            $orderList = $this->orderRepository->getList($searchCriteria);
+            foreach ($orderList->getItems() as $order) {
+                $exportDetails = $order->getExtensionAttributes()->getExportDetails();
+                if($exportDetails) {
+                    $output->writeln(print_r($exportDetails->getData(), true));
+                }
             }
         } catch (\Exception $e) {
             throw new LocalizedException(__($e->getMessage()));
