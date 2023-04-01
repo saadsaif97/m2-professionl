@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84d80e8020562b543bc7b595d046e471",
+    "content-hash": "7c66d4c278864a8aac2f9e3336fbc102",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -19295,6 +19295,31 @@
                 "source": "https://github.com/Spomky-Labs/otphp/tree/v10.0.3"
             },
             "time": "2022-03-17T08:00:35+00:00"
+        },
+        {
+            "name": "swiftotter/module-fulfillment-block",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "training-modules/project-professional-developer/src/fulfillment-block",
+                "reference": "fbcf2b6dcb14575985cd6136528d2f94e57d5595"
+            },
+            "require": {
+                "magento/framework": "^103"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "SwiftOtter\\FulfillmentBlock\\": ""
+                }
+            },
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "swiftotter/module-mock-erp-api",

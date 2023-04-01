@@ -41,6 +41,7 @@
         "magento/product-community-edition": "2.4.5-p1",
         "magento/sample-data-media": "100.4.*",
         "markshust/magento2-module-disabletwofactorauth": "^2.0",
+        "swiftotter/module-fulfillment-block": "dev-main",
         "swiftotter/module-mock-erp-api": "*"
     },
     "autoload": {

@@ -4,7 +4,10 @@
     "require": {
         "magento/framework": "100.0.*",
         "magento/module-sales": "^103",
-        "guzzlehttp/guzzle": "^7.4"
+        "guzzlehttp/guzzle": "^7.4",
+        "magento/module-catalog": "^104",
+        "magento/module-eav": "^102",
+        "swiftotter/module-fulfillment-block": "*"
     },
     "type": "magento2-module",
     "autoload": {
