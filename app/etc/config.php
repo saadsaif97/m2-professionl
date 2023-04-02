@@ -349,6 +349,7 @@ return [
         'PayPal_BraintreeGraphQl' => 1,
         'SwiftOtter_FulfillmentBlock' => 1,
         'SaadSaif_OrderExport' => 1,
+        'SaadSaif_OrderExportAdmin' => 1,
         'SwiftOtter_MockErpApi' => 1,
         'Temando_ShippingRemover' => 1
     ]
