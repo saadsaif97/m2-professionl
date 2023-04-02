@@ -81,3 +81,12 @@ public function getItems();
 ---
 
 >>> The goal of extension attribute is to work seamlessly with the new entity considering as the part of the original entity
+
+---
+### Chapter 6 included
+- Injecting a custom UI component into the checkout interface
+- Using a LayoutProcessorInterface to load dynamic data into the checkout JS layout
+- Creating a theme
+- Basic LESS structure and the use of _theme.less and _extend.less
+- The usage of view.xml
+- Translation via CSV files in i18n
