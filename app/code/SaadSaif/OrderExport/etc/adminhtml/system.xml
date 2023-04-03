@@ -15,6 +15,19 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
+                <field id="expedite_skus" translate="label comment" sortOrder="40" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Expedite SKUs</label>
+                    <comment>Comma-separated list</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="expedite_message" translate="label" sortOrder="50" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Expedite Message</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
                 <field id="api_token" translate="label" sortOrder="40" type="obscure" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>API token</label>
                     <depends>
