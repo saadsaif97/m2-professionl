@@ -7,7 +7,7 @@
                 <enabled>1</enabled>
                 <api_url>https://app.m2.test/mock_erp_api</api_url>
                 <api_token backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
-                <expedite_skus>24-MB01,24-MG03,24-WG084</expedite_skus>
+                <expedite_skus>24-MB01,24-MG03,24-WG084,24-MB03</expedite_skus>
                 <expedite_message>Order contains expedited items</expedite_message>
             </order_export>
         </sales>
