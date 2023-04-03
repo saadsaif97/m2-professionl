@@ -90,3 +90,10 @@ public function getItems();
 - Basic LESS structure and the use of _theme.less and _extend.less
 - The usage of view.xml
 - Translation via CSV files in i18n
+
+---
+### Chapter 7 included
+- Adding a resource with acl.xml and requiring that permission in several areas
+- Adding an admin menu item with menu.xml
+- Modifying the data source for a UI grid component
+- Adding a new column to a UI grid component
