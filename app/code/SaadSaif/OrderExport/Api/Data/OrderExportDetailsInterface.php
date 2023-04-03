@@ -9,6 +9,7 @@ interface OrderExportDetailsInterface
     public const SHIP_ON = "ship_on";
     public const MERCHANT_NOTES = "merchant_notes";
     public const EXPORTED_AT = "exported_at";
+    public const IS_ARCHIVED = "is_archived";
 
     public function getOrderId(): ?int;
 
@@ -25,6 +26,10 @@ interface OrderExportDetailsInterface
     public function getExportedAt(): ?\DateTime;
 
     public function setExportedAt(?\DateTime $exportedAt): OrderExportDetailsInterface;
+
+    public function getIsArchived(): bool;
+
+    public function setIsArchived(int $status): OrderExportDetailsInterface;
 
     public function hasBeenExported(): bool;
 }

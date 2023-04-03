@@ -17,6 +17,7 @@ use Magento\Framework\Data\Collection\Db\FetchStrategyInterface;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Framework\Event\ManagerInterface;
 use Psr\Log\LoggerInterface;
+use SaadSaif\OrderExport\Api\Data\OrderExportDetailsInterface;
 use SaadSaif\OrderExport\Model\ResourceModel\OrderExportDetails\Collection as OrderExportDetailsCollection;
 use SaadSaif\OrderExport\Model\ResourceModel\OrderExportDetails as OrderExportDetailsResource;
 
@@ -100,5 +101,14 @@ class Collection extends OrderExportDetailsCollection implements SearchResultInt
     public function setTotalCount($totalCount)
     {
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSelect()
+    {
+        $this->addFieldToFilter(OrderExportDetailsInterface::IS_ARCHIVED, 1);
+        return parent::getSelect();
     }
 }

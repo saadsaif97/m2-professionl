@@ -5,6 +5,7 @@
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true"
                 comment="ID"/>
         <column xsi:type="int" name="order_id" unsigned="true" nullable="false" comment="Order ID"/>
+        <column xsi:type="smallint" name="is_archived"  default="0" nullable="false" unsigned="false"/>
         <column name="shop_on" disabled="true"/>
         <column xsi:type="date" name="ship_on" comment="Ship On"/>
         <column xsi:type="text" name="merchant_notes" nullable="true" comment="State"/>

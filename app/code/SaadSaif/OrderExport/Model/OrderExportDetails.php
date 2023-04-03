@@ -59,6 +59,17 @@ class  OrderExportDetails extends AbstractModel implements OrderExportDetailsInt
         return $this;
     }
 
+    public function getIsArchived(): bool
+    {
+        return (bool) $this->getData(self::IS_ARCHIVED);
+    }
+
+    public function setIsArchived(int $status): OrderExportDetailsInterface
+    {
+        $this->setData($status ? 1 : 0);
+        return $this;
+    }
+
     public function hasBeenExported(): bool
     {
         return (bool) $this->getExportedAt();

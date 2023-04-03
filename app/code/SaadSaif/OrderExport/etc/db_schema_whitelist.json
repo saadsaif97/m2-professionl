@@ -6,7 +6,8 @@
             "shop_on": true,
             "merchant_notes": true,
             "exported_at": true,
-            "ship_on": true
+            "ship_on": true,
+            "is_archived": true
         },
         "constraint": {
             "PRIMARY": true,
