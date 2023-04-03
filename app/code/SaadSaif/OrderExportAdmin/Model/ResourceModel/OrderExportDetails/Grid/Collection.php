@@ -108,7 +108,7 @@ class Collection extends OrderExportDetailsCollection implements SearchResultInt
      */
     public function getSelect()
     {
-        $this->addFieldToFilter(OrderExportDetailsInterface::IS_ARCHIVED, 1);
+        $this->addFieldToFilter(OrderExportDetailsInterface::IS_ARCHIVED, 0);
         return parent::getSelect();
     }
 }

@@ -29,7 +29,7 @@ interface OrderExportDetailsInterface
 
     public function getIsArchived(): bool;
 
-    public function setIsArchived(int $status): OrderExportDetailsInterface;
+    public function setIsArchived(bool $status): OrderExportDetailsInterface;
 
     public function hasBeenExported(): bool;
 }
